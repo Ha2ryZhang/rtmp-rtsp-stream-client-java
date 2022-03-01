@@ -21,11 +21,13 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.media.MediaRecorder
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import com.pedro.encoder.input.audio.MicrophoneManager
 import com.pedro.rtplibrary.base.DisplayBase
 import com.pedro.rtplibrary.rtmp.RtmpDisplay
 import com.pedro.rtplibrary.rtsp.RtspDisplay
@@ -164,7 +166,7 @@ class DisplayService : Service() {
 
   fun startStreamRtp(endpoint: String) {
     if (displayBase?.isStreaming != true) {
-      if (displayBase?.prepareVideo() == true && displayBase?.prepareAudio() == true) {
+      if (displayBase?.prepareVideo() == true && displayBase?.prepareAudio(MediaRecorder.AudioSource.VOICE_COMMUNICATION,64 * 1024, 16000, true, true, true) == true) {
         displayBase?.startStream(endpoint)
       }
     } else {

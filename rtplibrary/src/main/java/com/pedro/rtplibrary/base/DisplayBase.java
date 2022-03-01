@@ -574,6 +574,10 @@ public abstract class DisplayBase implements GetAacData, GetVideoData, GetMicrop
     recordController.resumeRecord();
   }
 
+  public int getAudioSessionId(){
+    return microphoneManager.getAudioSessionId();
+  }
+
   public RecordController.Status getRecordStatus() {
     return recordController.getStatus();
   }
